@@ -1,0 +1,21 @@
+%h1 Conference room list
+%hr
+%table.table.table-bordered.table-sm
+  %thead
+    %tr
+      %th{:scope => "col"} #Room No
+      %th{:scope => "col"} Capacity
+      %th{:scope => "col"} Area
+      %th{:scope => "col"} Unit
+      %th{:scope => "col"} Action
+  %tbody
+    - @conference_rooms.each do |room|
+      %tr
+        %th{:scope => "row"}= room.room_no
+        %td= room.capacity
+        %td= room.area
+        %td= room.unit
+        %td
+          = link_to "Show", conference_room_path(room) , class: "btn btn-success btn-sm"
+          = link_to "Edit", edit_conference_room_path(room) , class: "btn btn-info btn-sm"
+          = link_to "Delete", conference_room_path(room) , method: :delete ,data: {confirm: "Are you sure"} , class: "btn btn-danger btn-sm"

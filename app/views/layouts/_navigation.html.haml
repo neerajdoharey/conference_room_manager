@@ -1,0 +1,37 @@
+%nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  %a.navbar-brand{href: "#"} Conference room booking
+  - if current_user
+    %button.navbar-toggler{"aria-controls" => "navbarNavDropdown", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNavDropdown", "data-toggle" => "collapse", type: "button"}
+      %span.navbar-toggler-icon
+    #navbarNavDropdown.collapse.navbar-collapse
+      %ul.navbar-nav.mr-auto
+        %li.nav-item.dropdown
+          %a#navbarDropdownMenuLink.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#"}
+            Conference Rooms
+          .dropdown-menu{"aria-labelledby" => "navbarDropdownMenuLink"}
+            = link_to("Rooms", conference_rooms_path, {class:"dropdown-item"})
+            = link_to("New Room", new_conference_room_path, {class:"dropdown-item"})
+        %li.nav-item.dropdown
+          %a#navbarDropdownMenuLink.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#"}
+            Subjects
+          .dropdown-menu{"aria-labelledby" => "navbarDropdownMenuLink"}
+            = link_to("Subjects", "#", {class:"dropdown-item"})
+            = link_to("New Subject", "#", {class:"dropdown-item"})
+        %li.nav-item.dropdown
+          %a#navbarDropdownMenuLink.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#"}
+            Teachers
+          .dropdown-menu{"aria-labelledby" => "navbarDropdownMenuLink"}
+            = link_to("Teachers", "#", {class:"dropdown-item"})
+            = link_to("New Teacher", "#", {class:"dropdown-item"})
+        %li.nav-item.dropdown
+          %a#navbarDropdownMenuLink.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#"}
+            Students
+          .dropdown-menu{"aria-labelledby" => "navbarDropdownMenuLink"}
+            = link_to("Students", "#", {class:"dropdown-item"})
+            = link_to("New Student", "#", {class:"dropdown-item"})
+    - if current_user
+      .form-inline.my-2.my-lg-0
+        %input.form-control.mr-sm-2{"aria-label" => "Search", :placeholder => "Search", :type => "search"}/
+        = link_to('Logout', destroy_user_session_path, method: :delete, class:"btn btn-outline-success my-2 my-sm-0")
+
+

@@ -1,0 +1,16 @@
+= render "shared/errors", obj: @conference_room
+= form_for @conference_room do |f|
+  .form-row
+    .form-group.col-md-4
+      = f.label :room_no
+      = f.text_field :room_no, :class => 'form-control',placeholder: "Room no"
+    .form-group.col-md-3
+      = f.label :capacity
+      = f.text_field :capacity, :class => 'form-control',placeholder: "Capacity"
+    .form-group.col-md-3
+      = f.label :area
+      = f.text_field :area, :class => 'form-control',placeholder: "Area"
+    .form-group.col-md-2
+      = f.label :unit
+      = f.select(:unit, @units, {}, { :class => 'form-control' })
+  = f.submit :class => "btn btn-primary"
