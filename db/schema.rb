@@ -10,13 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_28_165433) do
+ActiveRecord::Schema.define(version: 2018_09_29_113312) do
+
+  create_table "bookings", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "conference_room_id"
+    t.datetime "booking_date"
+    t.time "start_time"
+    t.time "end_time"
+    t.integer "position"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "conference_rooms", force: :cascade do |t|
     t.integer "room_no"
     t.integer "capacity"
     t.integer "area"
     t.string "unit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "holidays", force: :cascade do |t|
+    t.string "name"
+    t.date "holiday_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -29,6 +48,9 @@ ActiveRecord::Schema.define(version: 2018_09_28_165433) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "phone_no"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

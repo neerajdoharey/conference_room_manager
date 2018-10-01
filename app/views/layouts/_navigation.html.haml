@@ -13,17 +13,17 @@
             = link_to("New Room", new_conference_room_path, {class:"dropdown-item"})
         %li.nav-item.dropdown
           %a#navbarDropdownMenuLink.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#"}
-            Subjects
+            Holidays
           .dropdown-menu{"aria-labelledby" => "navbarDropdownMenuLink"}
-            = link_to("Subjects", "#", {class:"dropdown-item"})
-            = link_to("New Subject", "#", {class:"dropdown-item"})
-        %li.nav-item.dropdown
+            = link_to("Holidays", holidays_path, {class:"dropdown-item"})
+            = link_to("New Holiday", new_holiday_path, {class:"dropdown-item"})
+        -#%li.nav-item.dropdown
           %a#navbarDropdownMenuLink.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#"}
             Teachers
           .dropdown-menu{"aria-labelledby" => "navbarDropdownMenuLink"}
             = link_to("Teachers", "#", {class:"dropdown-item"})
             = link_to("New Teacher", "#", {class:"dropdown-item"})
-        %li.nav-item.dropdown
+        -#%li.nav-item.dropdown
           %a#navbarDropdownMenuLink.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#"}
             Students
           .dropdown-menu{"aria-labelledby" => "navbarDropdownMenuLink"}
@@ -31,7 +31,8 @@
             = link_to("New Student", "#", {class:"dropdown-item"})
     - if current_user
       .form-inline.my-2.my-lg-0
-        %input.form-control.mr-sm-2{"aria-label" => "Search", :placeholder => "Search", :type => "search"}/
+        = current_user.full_name.present? ? current_user.full_name : current_user.email
+        /%input.form-control.mr-sm-2{"aria-label" => "Search", :placeholder => "Search", :type => "search"}/
         = link_to('Logout', destroy_user_session_path, method: :delete, class:"btn btn-outline-success my-2 my-sm-0")
 
 

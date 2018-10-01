@@ -1,0 +1,10 @@
+= render "shared/errors", obj: @holiday
+= form_for @holiday , :html => {:class => 'form-horizontal', role: 'form'} do |f|
+  .form-row
+    .form-group.col-md-6
+      = f.label :name ,"holiday name"
+      = f.text_field :name, {class:'form-control', placeholder: 'Holiday name'}
+    .form-group.col-md-6
+      = f.label :holiday_date
+      = f.text_field :holiday_date, {class:'form-control', placeholder: 'Holiday Date'}
+    = f.submit :class => "btn btn-primary"

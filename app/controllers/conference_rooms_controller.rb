@@ -3,7 +3,7 @@ class ConferenceRoomsController < ApplicationController
   before_action :set_conference_room, only: [:destroy, :show, :edit, :update]
 
   def index
-    @conference_rooms = ConferenceRoom.all
+    @conference_rooms = ConferenceRoom.order(:room_no).page(params[:page]).per(5)
   end
 
   def new
@@ -27,7 +27,7 @@ class ConferenceRoomsController < ApplicationController
 
   def update
     if @conference_room.update(conference_room_params)
-      flash[:success] = "Standard was Successfully updated..."
+      flash[:success] = "Room was Successfully updated..."
       redirect_to conference_room_path(@conference_room)
     else
       render 'edit'
@@ -35,6 +35,12 @@ class ConferenceRoomsController < ApplicationController
   end
 
   def show
+  end
+
+  def destroy
+    @conference_room.destroy
+    flash[:danger] = "Conference Room was Successfully Deleted..."
+    redirect_to conference_rooms_path
   end
 
   private

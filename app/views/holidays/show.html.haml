@@ -1,0 +1,14 @@
+%h1= "Holiday - #{@holiday.name}"
+%hr
+-#%table.table.table-bordered.table-sm
+  %thead
+    %tr
+      %th{:scope => "col"} #
+      %th{:scope => "col"} Subject Code
+      %th{:scope => "col"} Subject Name
+  %tbody
+    - @holidays.each do |i|
+      %tr
+        %th{:scope => "row"}= i.id
+        %td= i.subject_code
+        %td= i.subject_name
