@@ -6,7 +6,7 @@ class CreateBookings < ActiveRecord::Migration[5.2]
       t.datetime :booking_date
       t.time :start_time
       t.time :end_time
-      t.integer :position
+      t.string :status
       t.string :description
       t.timestamps
     end

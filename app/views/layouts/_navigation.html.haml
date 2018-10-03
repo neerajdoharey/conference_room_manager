@@ -17,12 +17,12 @@
           .dropdown-menu{"aria-labelledby" => "navbarDropdownMenuLink"}
             = link_to("Holidays", holidays_path, {class:"dropdown-item"})
             = link_to("New Holiday", new_holiday_path, {class:"dropdown-item"})
-        -#%li.nav-item.dropdown
+        %li.nav-item.dropdown
           %a#navbarDropdownMenuLink.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#"}
-            Teachers
+            Bookings
           .dropdown-menu{"aria-labelledby" => "navbarDropdownMenuLink"}
-            = link_to("Teachers", "#", {class:"dropdown-item"})
-            = link_to("New Teacher", "#", {class:"dropdown-item"})
+            = link_to("Bookings", bookings_path, {class:"dropdown-item"})
+            = link_to("New Booking", new_booking_path, {class:"dropdown-item"})
         -#%li.nav-item.dropdown
           %a#navbarDropdownMenuLink.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#"}
             Students

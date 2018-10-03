@@ -11,11 +11,11 @@
     .form-group.col-md-3
       = f.label :start_time
       .inline
-        = time_select('booking', 'start_time', {ampm: true}, { :class => 'form-control col-md-6' })
+        = time_select('booking', :start_time, {ampm: true}, { :class => 'form-control col-md-6' })
     .form-group.col-md-3
       = f.label :end_time
       .inline
-        = time_select('booking', 'end_time', {ampm: true}, { :class => 'form-control col-md-6' })
+        = time_select('booking', :end_time, {ampm: true}, { :class => 'form-control col-md-6' })
     .form-group.col-md-6
       = f.label :description
       = f.text_field :description, {class:'form-control', placeholder: 'Description'}

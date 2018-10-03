@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2018_09_29_113312) do
     t.datetime "booking_date"
     t.time "start_time"
     t.time "end_time"
-    t.integer "position"
+    t.string "status"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

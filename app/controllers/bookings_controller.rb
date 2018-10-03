@@ -1,8 +1,8 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_booking, only: [:edit, :update]
+  before_action :set_booking, only: [:edit, :update, :cancel]
   def index
-    @bookings = Booking.all
+    @bookings = Booking.includes(:conference_room, :user).order( 'booking_date DESC' ).page(params[:page]).per(15)
   end
 
   def new
@@ -12,8 +12,7 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
     @booking.user = current_user
-    @booking.position = check_booking(params[:booking_date] ,params[:start_time], params[:end_time], params[:conference_room_id])
-
+    @booking.status = check_booking
     if @booking.save
       flash[:success] = "Booking Created Successfully"
       redirect_to bookings_path
@@ -37,6 +36,13 @@ class BookingsController < ApplicationController
   def show
   end
 
+  def cancel
+    @booking.status = "cancelled"
+    @booking.save
+    reallocate_room
+    redirect_to bookings_path
+  end
+
   private
   def booking_params
     params.require(:booking).permit(:user_id, :conference_room_id, :booking_date, :start_time, :end_time, :position, :description)
@@ -46,7 +52,25 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
   end
 
-  def check_booking(booking_date, start_time, end_time, room_id)
-    b = Booking.joins(:conference_room).where(conference_rooms: {room_no: '2'}, bookings:{booking_date: "2018-10-03 00:00:00"}) 
+  def check_booking
+    start_time = "#{params[:booking]['start_time(4i)']}:#{params[:booking]['start_time(5i)']}"
+    end_time = "#{params[:booking]['end_time(4i)']}:#{params[:booking]['end_time(5i)']}"
+    bookings = Booking.joins(:conference_room).where(conference_rooms: {id: params[:booking][:conference_room_id]}, bookings:{booking_date: params[:booking][:booking_date], status:"confirm"}).order( 'bookings.start_time')
+    status =  bookings.any?{|apt| start_time < apt.end_time.strftime("%H:%M") && apt.start_time.strftime("%H:%M") < end_time} ? "waiting" : "confirm"
+    return status
+  end
+
+  def reallocate_room
+    waiting_bookings = Booking.where(conference_room_id:@booking.conference_room_id, booking_date:@booking.booking_date, status:"waiting")
+    waiting_bookings.each do |booking|
+      bookings = Booking.joins(:conference_room).where(conference_rooms: {id:@booking.conference_room_id}, bookings:{booking_date:@booking.booking_date , status:"confirm"}).order( 'bookings.start_time')
+
+      unless bookings.any?{ |b| b.start_time.strftime("%H:%M") < booking.end_time.strftime("%H:%M") && booking.start_time.strftime("%H:%M") < b.end_time.strftime("%H:%M")}
+        booking.status = "confirm"
+        booking.save
+        #booking.status = "confirm" unless bookings.any?{|apt| start_time < apt.end_time.strftime("%H:%M") && apt.start_time.strftime("%H:%M") < end_time}
+      end
+    end
+    puts waiting_bookings.size
   end
 end
