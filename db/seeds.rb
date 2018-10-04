@@ -4,4 +4,10 @@
 # Examples:
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
+
 #   Character.create(name: 'Luke', movie: movies.first)
+#Roles
+Role.find_or_create_by(id: 1, name: "super_manager")
+Role.find_or_create_by(id: 2, name: "manager")
+Role.find_or_create_by(id: 3, name: "client")
+Role.find_or_create_by(id: 4, name: "guest")

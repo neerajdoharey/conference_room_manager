@@ -5,30 +5,33 @@
       %span.navbar-toggler-icon
     #navbarNavDropdown.collapse.navbar-collapse
       %ul.navbar-nav.mr-auto
+        -#if can? :new, ConferenceRoom
         %li.nav-item.dropdown
           %a#navbarDropdownMenuLink.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#"}
             Conference Rooms
           .dropdown-menu{"aria-labelledby" => "navbarDropdownMenuLink"}
-            = link_to("Rooms", conference_rooms_path, {class:"dropdown-item"})
-            = link_to("New Room", new_conference_room_path, {class:"dropdown-item"})
-        %li.nav-item.dropdown
-          %a#navbarDropdownMenuLink.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#"}
-            Holidays
-          .dropdown-menu{"aria-labelledby" => "navbarDropdownMenuLink"}
-            = link_to("Holidays", holidays_path, {class:"dropdown-item"})
-            = link_to("New Holiday", new_holiday_path, {class:"dropdown-item"})
+            = link_to("Rooms", conference_rooms_path, {class:"dropdown-item"})  if can? :index, ConferenceRoom
+            = link_to("New Room", new_conference_room_path, {class:"dropdown-item"}) if can? :new, ConferenceRoom
+        -if can? :new, Holiday
+          %li.nav-item.dropdown
+            %a#navbarDropdownMenuLink.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#"}
+              Holidays
+            .dropdown-menu{"aria-labelledby" => "navbarDropdownMenuLink"}
+              = link_to("Holidays", holidays_path, {class:"dropdown-item"})
+              = link_to("New Holiday", new_holiday_path, {class:"dropdown-item"})
         %li.nav-item.dropdown
           %a#navbarDropdownMenuLink.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#"}
             Bookings
           .dropdown-menu{"aria-labelledby" => "navbarDropdownMenuLink"}
             = link_to("New Booking", new_booking_path, {class:"dropdown-item"})
             = link_to("Bookings", bookings_path, {class:"dropdown-item"})
-        %li.nav-item.dropdown
-          %a#navbarDropdownMenuLink.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#"}
-            Facility
-          .dropdown-menu{"aria-labelledby" => "navbarDropdownMenuLink"}
-            = link_to("Facilities", facilities_path, {class:"dropdown-item"})
-            = link_to("New Facility", new_facility_path, {class:"dropdown-item"})
+        -if can? :new, ConferenceRoom
+          %li.nav-item.dropdown
+            %a#navbarDropdownMenuLink.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#"}
+              Facility
+            .dropdown-menu{"aria-labelledby" => "navbarDropdownMenuLink"}
+              = link_to("Facilities", facilities_path, {class:"dropdown-item"})
+              = link_to("New Facility", new_facility_path, {class:"dropdown-item"})
     - if current_user
       .form-inline.my-2.my-lg-0
         = current_user.full_name.present? ? current_user.full_name : current_user.email
