@@ -3,17 +3,19 @@ class ConferenceRoomsController < ApplicationController
   before_action :set_conference_room, only: [:destroy, :show, :edit, :update]
 
   def index
-    @conference_rooms = ConferenceRoom.order(:room_no).page(params[:page]).per(5)
+    @conference_rooms = ConferenceRoom.order(:room_no).page(params[:page]).per(10)
   end
 
   def new
     @conference_room = ConferenceRoom.new
     @units = units
+    @facilities = Facility.all
   end
 
   def create
     @conference_room = ConferenceRoom.new(conference_room_params)
     if @conference_room.save
+      @conference_room.facilities << Facility.where(id: params[:conference_room][:facilities] )
       flash[:success] = "Conference room created Successfully"
       redirect_to conference_rooms_path
     else
@@ -23,6 +25,7 @@ class ConferenceRoomsController < ApplicationController
 
   def edit
     @units = units
+    @facilities = Facility.all
   end
 
   def update

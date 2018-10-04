@@ -21,14 +21,14 @@
           %a#navbarDropdownMenuLink.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#"}
             Bookings
           .dropdown-menu{"aria-labelledby" => "navbarDropdownMenuLink"}
-            = link_to("Bookings", bookings_path, {class:"dropdown-item"})
             = link_to("New Booking", new_booking_path, {class:"dropdown-item"})
-        -#%li.nav-item.dropdown
+            = link_to("Bookings", bookings_path, {class:"dropdown-item"})
+        %li.nav-item.dropdown
           %a#navbarDropdownMenuLink.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#"}
-            Students
+            Facility
           .dropdown-menu{"aria-labelledby" => "navbarDropdownMenuLink"}
-            = link_to("Students", "#", {class:"dropdown-item"})
-            = link_to("New Student", "#", {class:"dropdown-item"})
+            = link_to("Facilities", facilities_path, {class:"dropdown-item"})
+            = link_to("New Facility", new_facility_path, {class:"dropdown-item"})
     - if current_user
       .form-inline.my-2.my-lg-0
         = current_user.full_name.present? ? current_user.full_name : current_user.email

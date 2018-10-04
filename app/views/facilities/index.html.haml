@@ -1,0 +1,16 @@
+%h1 List of Facilities
+%hr
+%table.table.table-bordered.table-sm
+  %thead
+    %tr
+      %th{:scope => "col"} Name
+      %th{:scope => "col"} Action
+  %tbody
+    - @facilities.each do |facility|
+      %tr
+        %td= facility.facility_name
+        %td
+          = link_to "Show", facility_path(facility) , class: "btn btn-success btn-sm"
+          = link_to "Edit", edit_facility_path(facility) , class: "btn btn-info btn-sm"
+          = link_to "Delete", facility_path(facility) , method: :delete ,data: {confirm: "Are you sure"} , class: "btn btn-danger btn-sm"
+= paginate @facilities

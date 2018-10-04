@@ -68,9 +68,7 @@ class BookingsController < ApplicationController
       unless bookings.any?{ |b| b.start_time.strftime("%H:%M") < booking.end_time.strftime("%H:%M") && booking.start_time.strftime("%H:%M") < b.end_time.strftime("%H:%M")}
         booking.status = "confirm"
         booking.save
-        #booking.status = "confirm" unless bookings.any?{|apt| start_time < apt.end_time.strftime("%H:%M") && apt.start_time.strftime("%H:%M") < end_time}
       end
     end
-    puts waiting_bookings.size
   end
 end

@@ -13,4 +13,10 @@
     .form-group.col-md-2
       = f.label :unit
       = f.select(:unit, @units, {}, { :class => 'form-control' })
+  .form-row
+    .form-group
+      - @facilities.each do |facility|
+        .form-check
+          = f.check_box( "facilities", { multiple: true, :class => 'form-check-input' }, facility.id, false)
+          = f.label facility.facility_name, {}, { :class => 'form-check-label' }
   = f.submit :class => "btn btn-primary"

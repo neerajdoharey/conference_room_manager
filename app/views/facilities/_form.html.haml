@@ -1,0 +1,8 @@
+= render "shared/errors", obj: @facility
+= form_for @facility, :html => {:class => 'form-horizontal', role: 'form'} do |f|
+  .form-row
+    .form-group.col-md-6
+      = f.label :facility_name
+      = f.text_field :facility_name, {class:'form-control', placeholder: 'Facility name'}
+    .form-group.col-md-6
+    = f.submit :class => "btn btn-primary"
