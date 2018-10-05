@@ -16,4 +16,10 @@ class User < ApplicationRecord
   def has_role?(role_sym)
       roles.any? { |r| r.name.underscore.to_sym == role_sym }
   end
+
+  after_create :welcome_send
+
+  def welcome_send
+   WelcomeMailer.welcome_send(self).deliver
+  end
 end

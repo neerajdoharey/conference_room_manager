@@ -2,7 +2,8 @@ class Booking < ApplicationRecord
   belongs_to :user
   belongs_to :conference_room
 
-  validate :check_holiday, :check_current_day, :check_start_end_time
+  validate :check_holiday, :check_current_day, :check_start_end_time,:check_weekend
+  validates :booking_date,:description, presence:true
 
   def check_current_day
     if booking_date < Date.today
@@ -21,5 +22,9 @@ class Booking < ApplicationRecord
     if holiday.present?
       errors.add(:booking_date ,"Holiday ")
     end
+  end
+
+  def check_weekend
+    errors.add(:booking_date,"Can't book on weekend")if booking_date.on_weekend?
   end
 end

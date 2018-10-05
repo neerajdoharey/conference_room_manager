@@ -14,6 +14,7 @@ class BookingsController < ApplicationController
     @booking.user = current_user
     @booking.status = check_booking
     if @booking.save
+      BookingMailer.booking_confirmation(@booking, current_user).deliver
       flash[:success] = "Booking Created Successfully"
       redirect_to bookings_path
     else
@@ -37,10 +38,12 @@ class BookingsController < ApplicationController
   end
 
   def cancel
-    @booking.status = "cancelled"
-    @booking.save
-    reallocate_room
-    redirect_to bookings_path
+    if @booking.update(status: "cancelled")
+      flash[:success] = "Booking Cancelled you will recieve mail shortly"
+      BookingMailer.booking_cancellation(@booking, current_user).deliver
+      reallocate_room
+      redirect_to bookings_path
+    end
   end
 
   private

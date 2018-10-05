@@ -1,0 +1,29 @@
+<h1>Booking confirmation</h1>
+<table class="table table-striped">
+  <tbody>
+    <tr>
+      <th scope="row">Name</th>
+      <td><%= @user.full_name %></td>
+    </tr>
+    <tr>
+      <th scope="row">Conference Room</th>
+      <td><%= @booking.conference_room.room_no %></td>
+    </tr>
+    <tr>
+      <th scope="row">Booking Date</th>
+      <td><%= @booking.booking_date.strftime("%d %b %Y")  %></td>
+    </tr>
+    <tr>
+      <th scope="row">Start Time</th>
+      <td><%= @booking.start_time.strftime("%H:%M") %></td>
+    </tr>
+    <tr>
+      <th scope="row">End Time</th>
+      <td><%= @booking.end_time.strftime("%H:%M") %></td>
+    </tr>
+    <tr>
+      <th scope="row">Status</th>
+      <td><%= @booking.status %></td>
+    </tr>
+  </tbody>
+</table>
