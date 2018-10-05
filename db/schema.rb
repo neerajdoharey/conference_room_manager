@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 2018_10_04_042540) do
     t.datetime "updated_at", null: false
     t.string "first_name"
     t.string "last_name"
-    t.integer "phone_no"
+    t.string "phone_no"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
