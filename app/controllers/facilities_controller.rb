@@ -1,5 +1,6 @@
 class FacilitiesController < ApplicationController
-before_action :set_facility, only: [:edit, :show, :update, :destroy]
+  load_and_authorize_resource
+  before_action :set_facility, only: [:edit, :show, :update, :destroy]
   def index
     @facilities = Facility.all.page(params[:page]).per(10)
 
@@ -51,3 +52,5 @@ before_action :set_facility, only: [:edit, :show, :update, :destroy]
   end
 
 end
+
+

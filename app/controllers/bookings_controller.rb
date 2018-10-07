@@ -1,5 +1,4 @@
 class BookingsController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_booking, only: [:edit, :update, :cancel]
   def index
     @bookings = Booking.includes(:conference_room, :user).order( 'booking_date DESC' ).page(params[:page]).per(15)

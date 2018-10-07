@@ -12,6 +12,9 @@ class Ability
     elsif user.has_role? :client
       can :manage, Booking # user can read any object
       can :read, ConferenceRoom
+    elsif user.has_role? :guest
+      can :read, Booking
+      can :read, ConferenceRoom
     end
     # Define abilities for the passed in user here. For example:
     #

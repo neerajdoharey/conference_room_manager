@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2018_10_04_042540) do
   end
 
   create_table "conference_rooms", force: :cascade do |t|
-    t.integer "room_no"
+    t.string "room_no"
     t.integer "capacity"
     t.integer "area"
     t.string "unit"

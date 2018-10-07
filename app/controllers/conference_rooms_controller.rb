@@ -1,5 +1,5 @@
 class ConferenceRoomsController < ApplicationController
-  before_action :authenticate_user!
+  load_and_authorize_resource
   before_action :set_conference_room, only: [:destroy, :show, :edit, :update]
 
   def index
@@ -44,6 +44,15 @@ class ConferenceRoomsController < ApplicationController
     @conference_room.destroy
     flash[:danger] = "Conference Room was Successfully Deleted..."
     redirect_to conference_rooms_path
+  end
+
+  def search_rooms
+    @facilities = Facility.all
+  end
+
+  def search
+    @rooms = ConferenceRoom.search(params[:facility_ids])
+    @facilities = Facility.all
   end
 
   private

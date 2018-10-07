@@ -1,0 +1,59 @@
+%h1 Search results for Conference room
+.row
+  - if @rooms && @rooms.size > 0
+    - @rooms.each do |room|
+      .col-sm-12.bottom-margin
+        .card
+          %h5.card-header Conefrence Room - #{room.room_no}
+          .card-body
+            .row
+              .col-sm-4
+                %h6.card-title Booking Date: #{params[:check_booking_date]}
+              .col-sm-4
+                %h6.card-title Capacity: #{room.capacity}
+              .col-sm-4
+                %h6.card-title Area: #{room.area}, #{room.unit}
+            .row
+              .col-sm-12
+                %h6.card-title
+                  Facilities:
+                  - room.facilities.each do |facility|
+                    #{" "}#{facility.facility_name},
+            - bookings = room.bookings.where(booking_date:params[:check_booking_date] , status: "confirm")
+            - if bookings.size > 0
+              %table.table.table-sm
+                %thead
+                  %tr
+                    %th{:scope => "col"} Client Name
+                    %th{:scope => "col"} Conference room
+                    %th{:scope => "col"} Date Booking
+                    %th{:scope => "col"} Start Time
+                    %th{:scope => "col"} End Time
+                    %th{:scope => "col"} Description
+                    %th{:scope => "col"} Status
+                %tbody
+                  - bookings.each do |booking|
+                    %tr
+                      %td= booking.user.full_name
+                      %td= booking.conference_room.room_no
+                      %td= booking.booking_date.strftime("%d %b %Y")
+                      %td= booking.start_time.strftime("%H:%M")
+                      %td= booking.end_time.strftime("%H:%M")
+                      %td= booking.description
+                      %td
+                        -if booking.status == "confirm"
+                          %span.badge.badge-success Confirm
+            - else
+              .alert.alert-success{:role => "alert"}
+                %h4.alert-heading Congratulations!
+                %p No one booked this conference room for #{params[:check_booking_date]} date.
+                %hr/
+                %p.mb-0 Be the first one to book the room.
+
+
+  - else
+    .col-sm-12.bottom-margin
+      .card
+        %h5.card-header Conefrence Room
+        .card-body
+          %h5.card-title No Room for such Facilities

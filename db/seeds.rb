@@ -11,29 +11,7 @@ Role.find_or_create_by(id: 1, name: "super_manager")
 Role.find_or_create_by(id: 2, name: "manager")
 Role.find_or_create_by(id: 3, name: "client")
 Role.find_or_create_by(id: 4, name: "guest")
-
-User.find_or_create_by({
-  id: 1
-  email: "sadmin@admin.com",
-  password: "sadmin",
-  first_name: "SuperAdmin",
-  last_name: "User",
-})
-
-user = User.find(1)
-user.roles << Role.find(1)
-
-User.find_or_create_by({
-  id: 1
-  email: "admin@admin.com",
-  password: "admin",
-  first_name: "Admin",
-  last_name: "User",
-})
-
-user = User.find(2)
-user.roles << Role.find(2)
-
+#Facility
 Facility.find_or_create_by(id: 1, facility_name: "Air conditioner")
 Facility.find_or_create_by(id: 2, facility_name: "Non Air conditioner")
 Facility.find_or_create_by(id: 3, facility_name: "Television")

@@ -1,4 +1,5 @@
 class HolidaysController < ApplicationController
+  load_and_authorize_resource
   before_action :set_holiday, only: [:edit, :show, :update, :destroy]
   def index
     @holidays = Holiday.all.page(params[:page]).per(5)

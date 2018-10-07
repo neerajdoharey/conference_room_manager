@@ -32,10 +32,18 @@
             .dropdown-menu{"aria-labelledby" => "navbarDropdownMenuLink"}
               = link_to("Facilities", facilities_path, {class:"dropdown-item"})
               = link_to("New Facility", new_facility_path, {class:"dropdown-item"})
+        %li.nav-item
+          = link_to "Search Rooms", search_rooms_path, {class:'nav-link'}
     - if current_user
       .form-inline.my-2.my-lg-0
-        = current_user.full_name.present? ? current_user.full_name : current_user.email
-        /%input.form-control.mr-sm-2{"aria-label" => "Search", :placeholder => "Search", :type => "search"}/
+        %ul.navbar-nav
+          %li.nav-item.dropdown
+            %a#navbarDropdownMenuLink.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+              = gravatar_for(current_user)
+              = current_user.full_name.present? ? current_user.full_name : current_user.email
+            .dropdown-menu{"aria-labelledby" => "navbarDropdownMenuLink"}
+              = link_to "My Profile",  edit_registration_path(current_user), {class:"dropdown-item"}
+              -#%a.dropdown-item{:href => "#"} Action
         = link_to('Logout', destroy_user_session_path, method: :delete, class:"btn btn-outline-success my-2 my-sm-0")
 
 

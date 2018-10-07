@@ -1,0 +1,14 @@
+#room_lookup
+  %h2  Search Conference Room
+  = form_tag search_path, method: :get, id: 'room-lookup-form' do
+    .form-inline
+      .form-group.mb-1
+        = text_field_tag "check_booking_date", nil, {class:'form-control', placeholder: 'Booking Date', type: 'text', required: ''}
+      .form-group.mx-sm-3.mb-2
+        %label.form-check-label Facilities :
+        - @facilities.each do |facility|
+          .form-check.form-check-inline
+            = check_box_tag "facility_ids[]", facility.id, false, { multiple: true, :class => 'form-check-input' }
+            = label_tag facility.facility_name, nil , { :class => 'form-check-label' }
+      .form-group.mx-sm-3.mb-2
+        %button.btn.btn-primary.mb-2{:type => "submit"} Search

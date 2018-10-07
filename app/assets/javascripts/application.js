@@ -18,7 +18,7 @@
 //= require bootstrap-sprockets
 //= require_tree .
 $( document ).ready(function() {
-  $("#booking_booking_date").datepicker({ dateFormat: 'D, dd M yy' });
+  $("#booking_booking_date").datepicker({ dateFormat: 'D, dd M yy' ,minDate: 0 });
   $( "#holiday_holiday_date" ).datepicker({ dateFormat: 'D, dd M yy' });
-  $("#student_dob").datepicker();
+  $("#check_booking_date").datepicker({ dateFormat: 'D, dd M yy' ,minDate: 0 });
 });

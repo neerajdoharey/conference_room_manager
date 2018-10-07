@@ -1,2 +1,15 @@
-%h1 ConferenceRooms#show
-%p Find me in app/views/conference_rooms/show.html.erb
+%h1 ConferenceRoom - #{@conference_room.room_no}
+%hr
+.card
+  %h5.card-header Room - #{@conference_room.room_no}
+  .card-body
+    %h5.card-title Capacity - #{@conference_room.capacity}
+    %h5.card-title Area - #{@conference_room.area} per #{@conference_room.unit}
+
+    %table.table.table-sm
+      %tbody
+        %tr
+          %th{:scope => "row"} Facilities
+          %td
+            - @conference_room.facilities.each do |facility|
+              #{facility.facility_name},
