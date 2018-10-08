@@ -1,5 +1,6 @@
 class ConferenceRoomsController < ApplicationController
   load_and_authorize_resource
+  skip_authorize_resource only: [:search_rooms, :search]
   before_action :set_conference_room, only: [:destroy, :show, :edit, :update]
 
   def index

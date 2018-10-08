@@ -39,8 +39,8 @@ class BookingsController < ApplicationController
   def cancel
     if @booking.update(status: "cancelled")
       flash[:success] = "Booking Cancelled you will recieve mail shortly"
-      #BookingMailer.booking_cancellation(@booking, current_user).deliver
-      CancellationWorker.perform_async(@booking.id)
+      BookingMailer.booking_cancellation(@booking, current_user).deliver
+      #CancellationWorker.perform_async(@booking.id)
       reallocate_room
       redirect_to bookings_path
     end

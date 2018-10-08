@@ -20,6 +20,7 @@ class User < ApplicationRecord
   after_create :welcome_send
 
   def welcome_send
+    self.roles << Role.find_by(name: "client")
     WelcomeMailer.welcome_send(self).deliver
   end
 end
