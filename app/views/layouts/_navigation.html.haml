@@ -23,7 +23,8 @@
           %a#navbarDropdownMenuLink.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#"}
             Bookings
           .dropdown-menu{"aria-labelledby" => "navbarDropdownMenuLink"}
-            = link_to("New Booking", new_booking_path, {class:"dropdown-item"})
+            -if can? :new, Booking
+              = link_to("New Booking", new_booking_path, {class:"dropdown-item"})
             = link_to("Bookings", bookings_path, {class:"dropdown-item"})
         -if can? :new, ConferenceRoom
           %li.nav-item.dropdown

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :facilities
   devise_for :users, :controllers => { :registrations => 'user/registrations' }
 
-  root to: "bookings#new"
+  root to: "bookings#index"
   get 'cancel',to: "bookings#cancel"
   get 'search_rooms', to: 'conference_rooms#search_rooms'
   get 'search', to: 'conference_rooms#search'
